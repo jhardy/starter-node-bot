@@ -11,6 +11,7 @@ config:
   friendly_name: Some Unnecessary Option
   info: This is an unnecessary option
   default: the default value
+  type: text
 #  - name: SECRET
 #    friendly_name: Shhhh
 #    info: This is an secret option
