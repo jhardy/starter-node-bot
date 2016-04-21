@@ -6,6 +6,7 @@ config:
   friendly_name: Weather API
   info: api key for weather service
   type: secret
+  global: true
 #  - name: SECRET
 #    friendly_name: Shhhh
 #    info: This is an secret option
