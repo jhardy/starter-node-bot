@@ -3,10 +3,10 @@ description: A simple node.js starter bot for Beep Boop
 avatar: resources/avatar.png
 #background: resources/background.png
 config:
-  - name: WEATHER_KEY
-    friendly_name: Weather API Key
-    info: config for weather api
-    type: secret
+- name: WEATHER_KEY
+  friendly_name: Weather API Key
+  info: config for weather api
+  type: secret
 #  - name: OPTION
 #    friendly_name: Some Unnecessary Option
 #    info: This is an unnecessary option
