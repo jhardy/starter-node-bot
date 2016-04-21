@@ -2,7 +2,10 @@ name: nodebot-test
 description: A simple node.js starter bot for Beep Boop
 avatar: resources/avatar.png
 #background: resources/background.png
-#config:
+config:
+  - name: WEATHER_KEY
+    friendly_name: Weather API Key
+    type: secret
 #  - name: OPTION
 #    friendly_name: Some Unnecessary Option
 #    info: This is an unnecessary option
