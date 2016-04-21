@@ -7,10 +7,10 @@ config:
   friendly_name: Weather API Key
   info: config for weather api
   type: secret
-#  - name: OPTION
-#    friendly_name: Some Unnecessary Option
-#    info: This is an unnecessary option
-#    default: the default value
+- name: OPTION
+  friendly_name: Some Unnecessary Option
+  info: This is an unnecessary option
+  default: the default value
 #  - name: SECRET
 #    friendly_name: Shhhh
 #    info: This is an secret option
