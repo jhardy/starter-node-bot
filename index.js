@@ -2,6 +2,8 @@ var Botkit = require('botkit');
 var request = require('request');
 var Promise = require("promise");
 
+var weatherIconLookup = require('./lib/weatherbot');
+
 
 // Expect a SLACK_TOKEN environment variable
 var slackToken = process.env.SLACK_TOKEN
