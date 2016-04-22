@@ -1,4 +1,7 @@
-var Botkit = require('botkit')
+var Botkit = require('botkit');
+var request = require('request');
+var Promise = require("promise");
+
 
 // Expect a SLACK_TOKEN environment variable
 var slackToken = process.env.SLACK_TOKEN
@@ -65,4 +68,51 @@ controller.hears(['attachment'], ['direct_message', 'direct_mention'], function 
 
 controller.hears('.*', ['direct_message', 'direct_mention'], function (bot, message) {
   bot.reply(message, 'Sorry <@' + message.user + '>, I don\'t understand. \n')
-})
+});
+
+
+controller.hears(['weather (.*)'], 'direct_message,direct_mention,mention', function(bot, message){
+
+  var apiKey = "&appid=" + process.env.WEATHER_KEY;
+  var units = "&units=imperial"
+  var baseURL = 'http://api.openweathermap.org/data/2.5/weather';
+
+  var matchedText =  message.match[1];
+  var paramter = isNaN(matchedText) ? '?q=' + matchedText : '?zip=' + matchedText + ',us';
+  var requestURL = baseURL + paramter + apiKey + units;
+
+  console.log("Icon test: ", weatherIconLookup(100))
+  requestp(requestURL, true).then(function(data) {
+      console.log(data);
+      var icon = weatherIconLookup(data.weather[0].id);
+      console.log(data.weather[0].id, icon)
+      var temp = data.main.temp;
+
+      bot.reply(message, {
+        text: "Current temperature in *" + data.name + "* is *" + temp + "º F* with a condition of *" + data.weather[0].description + "*",
+        username: "WeatherBot",
+        icon_emoji: icon
+      })
+
+  },  function (err) {
+        console.log(err);
+  })
+
+
+});
+
+function requestp(url, json) {
+    json = json || false;
+    return new Promise(function (resolve, reject) {
+        request({url:url, json:json}, function (err, res, body) {
+            if (err) {
+                return reject(err);
+            } else if (res.statusCode !== 200) {
+                err = new Error("Unexpected status code: " + res.statusCode);
+                err.res = res;
+                return reject(err);
+            }
+            resolve(body);
+        });
+    });
+}
